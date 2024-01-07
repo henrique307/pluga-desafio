@@ -1,0 +1,31 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: rgb(100, 100, 100);
+    width: 90%;
+    height: 50px;
+    margin: 20px auto;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.header-input {
+    color: white;
+    background-color: rgb(150, 150, 150);
+    border: none;
+    border-radius: 3px;
+    height: 30px;
+    box-shadow: none;
+    width: 65%;
+    padding: 0 20px;
+}
+
+.header-input:focus {
+    outline: none;
+    caret-color: white;
+}
+
+.logo {
+    width: 100px;
+}
