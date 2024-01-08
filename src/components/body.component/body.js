@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getData } from "../../utils/getData.js";
 import Modal from "react-modal";
 import { removerDuplicatas } from "../../utils/filtrarObj.js";
+import Cookies from 'js-cookie';
 import loadingSVG from "../../assets/gears-spinner.svg"
 import "./body.css";
 
@@ -16,6 +17,11 @@ export const BodyComponent = ({ pesquisa }) => {
     const [qtdPaginas, setQtdPaginas] = useState(null);
 
     useEffect(() => {
+        const cookieValue = Cookies.get("itens");
+    
+        if (cookieValue) {
+            setHistorico(cookieValue === "undefined" ? undefined : JSON.parse(cookieValue));
+        }
 
         (async () => {
             try {
@@ -24,7 +30,6 @@ export const BodyComponent = ({ pesquisa }) => {
                 setDados(undefined)
             }
         })()
-
     }, []);
 
     useEffect(() => {
@@ -33,9 +38,16 @@ export const BodyComponent = ({ pesquisa }) => {
         setQtdPaginas(Math.ceil(filtro.length / 12));
     }, [pesquisa, dados])
 
+    useEffect(() => {
+        Cookies.set("itens", handleCookies(historico), { expires: 7 });
+    }, [historico]);
 
     function handlePageChange(event) {
         setPaginaAtual(+event.target.className.split(" ")[1])
+    }
+
+    function handleCookies(historico) {
+        return JSON.stringify(historico.slice(0, 3))
     }
 
     function conteudoHandler(conteudo, i) {
