@@ -100,6 +100,15 @@
     height: 200px;
 }
 
+.fechar {
+    font-size: 15px;
+    cursor: pointer;
+    float: right;
+    background: none;
+    border: none;
+    font-weight: bolder;
+}
+
 .modal-body {
     width: 350px;
     height: 50%;

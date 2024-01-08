@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getData } from "../../utils/getData.js";
 import Modal from "react-modal";
-import Cookies from 'js-cookie';
+import { removerDuplicatas } from "../../utils/filtrarObj.js";
 import loadingSVG from "../../assets/gears-spinner.svg"
 import "./body.css";
 
@@ -16,10 +16,6 @@ export const BodyComponent = ({ pesquisa }) => {
     const [qtdPaginas, setQtdPaginas] = useState(null);
 
     useEffect(() => {
-        const cookieValue = Cookies.get('itens');
-        if (cookieValue) {
-            setHistorico(JSON.parse(cookieValue));
-        }
 
         (async () => {
             try {
@@ -28,6 +24,7 @@ export const BodyComponent = ({ pesquisa }) => {
                 setDados(undefined)
             }
         })()
+
     }, []);
 
     useEffect(() => {
@@ -36,9 +33,6 @@ export const BodyComponent = ({ pesquisa }) => {
         setQtdPaginas(Math.ceil(filtro.length / 12));
     }, [pesquisa, dados])
 
-    useEffect(() => {
-        Cookies.set('itens', JSON.stringify(historico));
-    }, [historico]);
 
     function handlePageChange(event) {
         setPaginaAtual(+event.target.className.split(" ")[1])
@@ -72,7 +66,7 @@ export const BodyComponent = ({ pesquisa }) => {
 
                         <ul className="pagina-icon-container">
                             {
-                                Array.from({length: qtdPaginas}, (_, i) => {
+                                Array.from({ length: qtdPaginas }, (_, i) => {
                                     return <li key={i} onClick={handlePageChange} className={`pagina-icon ${i + 1}`}>&#x2B24;</li>
                                 })
                             }
@@ -89,10 +83,10 @@ export const BodyComponent = ({ pesquisa }) => {
     function abrirModal(item) {
 
         setHistorico((historicoAntigo) => {
-            const novoHisrocio = [item, ...historicoAntigo];
+            const novoHistorico = [item, ...historicoAntigo];
             // Remover duplicatas mantendo apenas itens únicos
-            const historicoUnico = [...new Set(novoHisrocio)];
-            return historicoUnico
+            const historicoSemDuplicatas = removerDuplicatas(novoHistorico);
+            return historicoSemDuplicatas
         });
 
         setConteudoModal(item)
@@ -120,6 +114,7 @@ export const BodyComponent = ({ pesquisa }) => {
                 }}
 
             >
+                <button className="fechar" onClick={fecharModal}>x</button>
                 <div className="modal-body">
                     <img alt={conteudoModal?.name} className="modal-icon" src={conteudoModal?.icon} />
                     <section className="item-info">

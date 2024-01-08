@@ -9,7 +9,7 @@ export const HeaderComponent = ({setPesquisa}) => {
 
     return (
         <header className="header">
-            <img alt="logo" className="logo" src={logo}/>
+            <a target="_blank" rel="noreferrer" href="https://pluga.co/" className="logo-link"><img alt="logo" className="logo" src={logo}/></a>
             <input className="header-input" onChange={pesquisaHandle}/>
         </header>
     )
