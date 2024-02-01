@@ -5,6 +5,7 @@ import { removerDuplicatas } from "../../utils/filtrarObj.js";
 import Cookies from 'js-cookie';
 import loadingSVG from "../../assets/gears-spinner.svg"
 import "./body.css";
+import { clarearCor, escurecerCor } from "../../utils/modificaCor.js";
 
 Modal.setAppElement("#root");
 
@@ -67,9 +68,9 @@ export const BodyComponent = ({ pesquisa }) => {
                             {
                                 conteudo.map((item, i) => {
                                     return (
-                                        <li className="card" key={i}>
-                                            <img alt={`${item.name} logo`} className="icone" src={item.icon} />
-                                            <span onClick={(() => abrirModal(item))} className="icone-nome">{item.name}</span>
+                                        <li className="card" key={i} style={{'background-color': item.color}}>
+                                            <img alt={`${item.name} logo`} className="icone" src={item.icon}/>
+                                            <span onClick={(() => abrirModal(item))} className="icone-nome" style={{'background-color': clarearCor(item.color, 30)}}>{item.name}</span>
                                         </li>
                                     )
                                 })
@@ -118,7 +119,6 @@ export const BodyComponent = ({ pesquisa }) => {
                     content: {
                         margin: "0 auto",
                         width: "60%",
-                        border: '1px solid green',
                         background: 'rgb(255, 255, 255)',
                         borderRadius: '20px',
                         padding: '20px'
@@ -128,7 +128,7 @@ export const BodyComponent = ({ pesquisa }) => {
             >
                 <button className="fechar" onClick={fecharModal}>x</button>
                 <div className="modal-body">
-                    <img alt={conteudoModal?.name} className="modal-icon" src={conteudoModal?.icon} />
+                    <img alt={conteudoModal?.name} className="modal-icon" src={conteudoModal?.icon} style={{backgroundColor: conteudoModal?.color}}/>
                     <section className="item-info">
                         <h1>{conteudoModal?.name}</h1>
                         <a target="_blank" rel="noreferrer" href={conteudoModal?.link} className="acessar-button">acessar</a>
@@ -141,7 +141,7 @@ export const BodyComponent = ({ pesquisa }) => {
                             historico.slice(1, 4).map((item, index) => {
                                 return (
                                     <div key={index} className="modal-historico-item">
-                                        <img alt={item.name} className="modal-historico-icone" src={item.icon} />
+                                        <img alt={item.name} className="modal-historico-icone" src={item.icon} style={{backgroundColor: item.color}}/>
                                         <span className="modal-historico-nome">{item.name}</span>
                                         <a target="_blank" rel="noreferrer" href={item.link} className="acessar-button">acessar</a>
                                     </div>

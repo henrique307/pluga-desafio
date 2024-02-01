@@ -3,11 +3,9 @@ header {
     align-items: center;
     justify-content: space-evenly;
     background-color: rgb(100, 100, 100);
-    width: 90%;
+    margin-bottom: 30px;
     height: 50px;
-    margin: 20px auto;
-    border-radius: 5px;
-    padding: 5px;
+    padding: 15px 5px;
 }
 
 .header-input {
