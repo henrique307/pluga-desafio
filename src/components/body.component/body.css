@@ -1,7 +1,7 @@
 .corpo {
     width: 80%;
     height: 90vh;
-    margin: auto;
+    margin: 0 auto;
 }
 
 .content-container {
@@ -12,13 +12,14 @@
 }
 
 .card {
-    transition: 0.1s all;
+    transition: 0.3s all;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    width: 180px;
-    height: 180px;
+    background-color: rgb(200, 200, 200);
+    width: 200px;
+    height: 200px;
     margin: 0 auto;
     list-style: none;
 }
@@ -27,8 +28,7 @@
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    column-gap: 50px;
-    row-gap: 20px;
+    gap: 20px;
     padding: 0;
 }
 
@@ -76,7 +76,6 @@
 .modal-icon {
     border-radius: 50%;
     background-color: rgb(146, 146, 146);
-    padding: 15px;
     width: 150px;
 }
 
@@ -152,8 +151,8 @@
 
 .modal-historico-icone {
     border-radius: 50%;
+    background-color: rgb(146, 146, 146);
     width: 90px;
-    padding: 5px;
 }
 
 .modal-historico-nome {
