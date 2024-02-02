@@ -1,4 +1,4 @@
-.corpo {
+.body {
     width: 80%;
     height: 90vh;
     margin: auto;
@@ -53,26 +53,6 @@
     padding: 0;
 }
 
-.pagina-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20px;
-    height: 20px;
-    color: rgb(100, 100, 100);
-    font-weight: bold;
-    margin: 20px 5px;
-    font-size: 10px;
-    list-style: none;
-    cursor: pointer;
-    transition: 0.1s ease-in-out;
-}
-
-.pagina-icon:hover {
-    color: rgb(50, 50, 50);
-    font-size: 15px;
-}
-
 .modal-icon {
     border-radius: 50%;
     background-color: rgb(146, 146, 146);
@@ -101,7 +81,7 @@
     height: 200px;
 }
 
-.fechar {
+.close {
     font-size: 15px;
     cursor: pointer;
     float: right;
@@ -134,7 +114,7 @@
     text-align: center;
 }
 
-.modal-historico {
+.modal-history {
     margin: 0 auto;
     width: 80%;
     display: grid;
@@ -142,7 +122,7 @@
     gap: 10%
 }
 
-.modal-historico-item {
+.modal-history-item {
     height: 200px;
     display: flex;
     flex-direction: column;
@@ -150,13 +130,13 @@
     justify-content: space-around;
 }
 
-.modal-historico-icone {
+.modal-history-icon {
     border-radius: 50%;
     width: 90px;
     padding: 5px;
 }
 
-.modal-historico-nome {
+.modal-history-name {
     font-weight: bold;
     text-align: center;
     color: rgb(50, 50, 50)

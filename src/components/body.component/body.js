@@ -1,117 +1,73 @@
 import { useEffect, useState } from "react";
 import { getData } from "../../utils/getData.js";
 import Modal from "react-modal";
-import { removerDuplicatas } from "../../utils/filtrarObj.js";
+import { removeDobleItens } from "../../utils/filtrarObj.js";
 import Cookies from 'js-cookie';
-import loadingSVG from "../../assets/gears-spinner.svg"
 import "./body.css";
-import { clarearCor, escurecerCor } from "../../utils/modificaCor.js";
+import { LoadingComponent } from "./loading.SubComponent/loading.js";
+import { ListComponent } from "./list.SubComponent/list.js";
 
 Modal.setAppElement("#root");
 
-export const BodyComponent = ({ pesquisa }) => {
-    const [dados, setDados] = useState([]);
+export const BodyComponent = ({ search }) => {
+    const [data, setData] = useState(null);
     const [open, setOpen] = useState(false);
-    const [conteudoModal, setConteudoModal] = useState(null);
-    const [historico, setHistorico] = useState([]);
-    const [paginaAtual, setPaginaAtual] = useState(1);
-    const [qtdPaginas, setQtdPaginas] = useState(null);
+    const [modalContent, setModalContent] = useState(null);
+    const [history, setHistory] = useState([]);
+
+    const itensPerPage = 12
+    const expirationCookieDate = 7 // dias
 
     useEffect(() => {
         const cookieValue = Cookies.get("itens");
-    
+
         if (cookieValue) {
-            setHistorico(cookieValue === "undefined" ? undefined : JSON.parse(cookieValue));
+            setHistory(cookieValue === "undefined" ? undefined : JSON.parse(cookieValue));
         }
 
         (async () => {
             try {
-                setDados(await getData())
+                setData(await getData())
             } catch (e) {
-                setDados(undefined)
+                setData(undefined)
             }
         })()
     }, []);
 
-    useEffect(() => {
-        setPaginaAtual(1);
-        let filtro = dados.filter(dado => new RegExp(pesquisa, "i").test(dado.name))
-        setQtdPaginas(Math.ceil(filtro.length / 12));
-    }, [pesquisa, dados])
-
-    useEffect(() => {
-        Cookies.set("itens", handleCookies(historico), { expires: 7 });
-    }, [historico]);
-
-    function handlePageChange(event) {
-        setPaginaAtual(+event.target.className.split(" ")[1])
+    function handleCookies(history) {
+        Cookies.set("itens", JSON.stringify(history.slice(0, 3)), { expires: expirationCookieDate });
     }
 
-    function handleCookies(historico) {
-        return JSON.stringify(historico.slice(0, 3))
-    }
+    function contentHandler(content, i) {
 
-    function conteudoHandler(conteudo, i) {
-        const qtdItensPorPagina = 12;
-        const indexUltimoItem = paginaAtual * qtdItensPorPagina;
-        const indexPrimeiroItem = indexUltimoItem - qtdItensPorPagina;
+        if(!content) return <LoadingComponent/>;
 
-        conteudo = conteudo
-            .filter(item => new RegExp(pesquisa, "i").test(item.name))
-            .slice(indexPrimeiroItem, indexUltimoItem)
+        content = content
+            .filter(item => new RegExp(search, 'i').test(item.name))
+            // .filter(item => item.name.toUpperCase().includes(search.toUpperCase()))
 
-        return !conteudo ? <div>Estranho... ocorreu um erro buscando os dados necessários, por favor entre em contato com nosso time de desenvolvimento ~link de contato~</div> :
-            conteudo.length === 0 ? <div className="loading-container"><img className="loading-svg" src={loadingSVG} alt="carregando..." /></div> :
-                (
-                    <div className="content-container">
-                        <ul className="card-container">
-                            {
-                                conteudo.map((item, i) => {
-                                    return (
-                                        <li className="card" key={i} style={{'background-color': item.color}}>
-                                            <img alt={`${item.name} logo`} className="icone" src={item.icon}/>
-                                            <span onClick={(() => abrirModal(item))} className="icone-nome" style={{'background-color': clarearCor(item.color, 30)}}>{item.name}</span>
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
+        return <ListComponent content={content} abrirModal={abrirModal} itensPerPage={itensPerPage} />
 
-                        <ul className="pagina-icon-container">
-                            {
-                                Array.from({ length: qtdPaginas }, (_, i) => {
-                                    return <li key={i} onClick={handlePageChange} className={`pagina-icon ${i + 1}`}>&#x2B24;</li>
-                                })
-                            }
-                        </ul>
-                    </div>
-                )
-
-    }
-
-    function fecharModal() {
-        setOpen(false)
     }
 
     function abrirModal(item) {
 
-        setHistorico((historicoAntigo) => {
-            const novoHistorico = [item, ...historicoAntigo];
-            // Remover duplicatas mantendo apenas itens únicos
-            const historicoSemDuplicatas = removerDuplicatas(novoHistorico);
-            return historicoSemDuplicatas
+        setHistory((historyAntigo) => {
+            const newHistory = [item, ...historyAntigo];
+            const uniqueHistory = removeDobleItens(newHistory);
+            return uniqueHistory
         });
 
-        setConteudoModal(item)
+        setModalContent(item)
         setOpen(true)
     }
 
     return (
-        <div className="corpo">
-            {conteudoHandler(dados)}
+        <div className="body">
+            {contentHandler(data)}
             <Modal
                 isOpen={open}
-                onRequestClose={fecharModal}
+                onRequestClose={() => setOpen(false)}
                 style={{
                     overlay: {
                         backgroundColor: 'rgba(0, 0 ,0, 0.8)'
@@ -126,23 +82,23 @@ export const BodyComponent = ({ pesquisa }) => {
                 }}
 
             >
-                <button className="fechar" onClick={fecharModal}>x</button>
+                <button className="close" onClick={() => setOpen(false)}>x</button>
                 <div className="modal-body">
-                    <img alt={conteudoModal?.name} className="modal-icon" src={conteudoModal?.icon} style={{backgroundColor: conteudoModal?.color}}/>
+                    <img alt={modalContent?.name} className="modal-icon" src={modalContent?.icon} style={{backgroundColor: modalContent?.color}}/>
                     <section className="item-info">
-                        <h1>{conteudoModal?.name}</h1>
-                        <a target="_blank" rel="noreferrer" href={conteudoModal?.link} className="acessar-button">acessar</a>
+                        <h1>{modalContent?.name}</h1>
+                        <a target="_blank" rel="noreferrer" href={modalContent?.link} className="acessar-button">acessar</a>
                     </section>
                 </div>
                 <div className="modal-footer">
                     <h3 className="modal-footer-header">Ultimas ferramentas visualizadas</h3>
-                    <section className="modal-historico">
+                    <section className="modal-history">
                         {
-                            historico.slice(1, 4).map((item, index) => {
+                            history.slice(1, 4).map((item, index) => {
                                 return (
-                                    <div key={index} className="modal-historico-item">
-                                        <img alt={item.name} className="modal-historico-icone" src={item.icon} style={{backgroundColor: item.color}}/>
-                                        <span className="modal-historico-nome">{item.name}</span>
+                                    <div key={index} className="modal-history-item">
+                                        <img alt={item.name} className="modal-history-icone" src={item.icon} style={{backgroundColor: item.color}}/>
+                                        <span className="modal-history-nome">{item.name}</span>
                                         <a target="_blank" rel="noreferrer" href={item.link} className="acessar-button">acessar</a>
                                     </div>
                                 )

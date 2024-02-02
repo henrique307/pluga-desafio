@@ -1,4 +1,4 @@
-export function removerDuplicatas(lista) {
+export function removeDobleItens(lista) {
     const objetosUnicos = [];
     const idsVistos = new Set();
 

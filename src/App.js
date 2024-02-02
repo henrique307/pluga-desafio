@@ -3,12 +3,12 @@ import { BodyComponent } from "./components/body.component/body";
 import { HeaderComponent } from "./components/header.component/header";
 
 function App() {
-  const [pesquisa, setPesquisa] = useState("")
+  const [search, setSearch] = useState("")
 
   return (
     <div className="App">
-      <HeaderComponent setPesquisa={setPesquisa} />
-      <BodyComponent pesquisa={pesquisa} />
+      <HeaderComponent setSearch={setSearch} />
+      <BodyComponent pesquisa={search} />
     </div>
   );
 }
