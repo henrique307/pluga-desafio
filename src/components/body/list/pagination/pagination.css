@@ -1,3 +1,10 @@
+.page-icon-container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
 .page-icon {
     display: flex;
     justify-content: center;

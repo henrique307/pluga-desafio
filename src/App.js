@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { BodyComponent } from "./components/body.component/body";
-import { HeaderComponent } from "./components/header.component/header";
+import { BodyComponent } from "./components/body/body.component";
+import { HeaderComponent } from "./components/header/header.component";
 
 function App() {
   const [search, setSearch] = useState("")
@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <HeaderComponent setSearch={setSearch} />
-      <BodyComponent pesquisa={search} />
+      <BodyComponent search={search} />
     </div>
   );
 }
