@@ -1,9 +1,5 @@
-import "./notFound.css"
+import "./notFound.css";
 
-export function NotFoundComponent () {
-    return (
-        <h2 className="message">
-            Nenhum item foi encontrado
-        </h2>
-    )
+export function NotFoundComponent() {
+  return <h2 className="message">Nenhum item foi encontrado</h2>;
 }

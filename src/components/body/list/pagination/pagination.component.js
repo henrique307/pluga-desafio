@@ -1,11 +1,11 @@
+import { useAppContext } from "../../../../context/search.context";
 import "./pagination.css"
 
 export function PaginationComponent({
-  setCurrentPage,
-  currentPage,
   content,
   itensPerPage,
 }) {
+  const {currentPage, setCurrentPage} = useAppContext();
 
   const pageQuantity = Math.ceil(content.length / itensPerPage);
   

@@ -1,14 +1,14 @@
-import { useState } from "react";
 import { BodyComponent } from "./components/body/body.component";
 import { HeaderComponent } from "./components/header/header.component";
+import { Provider } from "./context/search.context";
 
 function App() {
-  const [search, setSearch] = useState("")
-
   return (
     <div className="App">
-      <HeaderComponent setSearch={setSearch} />
-      <BodyComponent search={search} />
+      <Provider>
+        <HeaderComponent />
+        <BodyComponent />
+      </Provider>
     </div>
   );
 }

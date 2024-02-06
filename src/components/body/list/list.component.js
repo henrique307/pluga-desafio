@@ -1,18 +1,18 @@
 import { PaginationComponent } from "./pagination/pagination.component";
 import { lightenColor } from "../../../utils";
-import { useState } from "react";
 import "./list.css";
 import { NotFoundComponent } from "./notFound/notfound.component";
+import { useAppContext } from "../../../context/search.context";
 
 export function ListComponent({ content, abrirModal, itensPerPage }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  
+  const { currentPage, setCurrentPage } = useAppContext();
+
   const lastIemIndex = currentPage * itensPerPage;
   const firstItemIndex = lastIemIndex - itensPerPage;
 
   const itemsInPage = content.slice(firstItemIndex, lastIemIndex);
 
-  if(content.length === 0) return <NotFoundComponent/>
+  if (content.length === 0) return <NotFoundComponent />;
 
   return (
     <div className="content-container">
@@ -24,11 +24,7 @@ export function ListComponent({ content, abrirModal, itensPerPage }) {
               key={i}
               style={{ backgroundColor: item.color }}
             >
-              <img
-                alt={`${item.name} logo`}
-                className="icon"
-                src={item.icon}
-              />
+              <img alt={`${item.name} logo`} className="icon" src={item.icon} />
               <span
                 onClick={() => abrirModal(item)}
                 className="icon-name"
@@ -40,7 +36,7 @@ export function ListComponent({ content, abrirModal, itensPerPage }) {
           );
         })}
       </ul>
-      
+
       <PaginationComponent
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
