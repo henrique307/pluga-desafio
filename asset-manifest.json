@@ -1,17 +1,15 @@
 {
   "files": {
-    "main.css": "/pluga-desafio/static/css/main.efd40f09.css",
-    "main.js": "/pluga-desafio/static/js/main.292373bf.js",
-    "static/js/787.047d44be.chunk.js": "/pluga-desafio/static/js/787.047d44be.chunk.js",
+    "main.css": "/pluga-desafio/static/css/main.e7fccf8a.css",
+    "main.js": "/pluga-desafio/static/js/main.a60d85ca.js",
     "static/media/logo_pluga.png": "/pluga-desafio/static/media/logo_pluga.4df70e85cdc10c79d510.png",
     "static/media/gears-spinner.svg": "/pluga-desafio/static/media/gears-spinner.d97ec3b48c28991ea40ac45ab5c8cf92.svg",
     "index.html": "/pluga-desafio/index.html",
-    "main.efd40f09.css.map": "/pluga-desafio/static/css/main.efd40f09.css.map",
-    "main.292373bf.js.map": "/pluga-desafio/static/js/main.292373bf.js.map",
-    "787.047d44be.chunk.js.map": "/pluga-desafio/static/js/787.047d44be.chunk.js.map"
+    "main.e7fccf8a.css.map": "/pluga-desafio/static/css/main.e7fccf8a.css.map",
+    "main.a60d85ca.js.map": "/pluga-desafio/static/js/main.a60d85ca.js.map"
   },
   "entrypoints": [
-    "static/css/main.efd40f09.css",
-    "static/js/main.292373bf.js"
+    "static/css/main.e7fccf8a.css",
+    "static/js/main.a60d85ca.js"
   ]
 }
