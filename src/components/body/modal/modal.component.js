@@ -1,8 +1,7 @@
 import Modal from "react-modal";
-import "./modal.css"
+import "./modal.css";
 
-export function ModalComponent({modalContent, history, open, setOpen}) {
-
+export function ModalComponent({ modalContent, history, open, setOpen }) {
   Modal.setAppElement("#root");
 
   return (
@@ -45,9 +44,7 @@ export function ModalComponent({modalContent, history, open, setOpen}) {
         </section>
       </div>
       <div className="modal-footer">
-        <h3 className="modal-footer-head">
-          Ultimas ferramentas visualizadas
-        </h3>
+        <h3 className="modal-footer-head">Ultimas ferramentas visualizadas</h3>
         <section className="modal-history">
           {history.slice(1, 4).map((item, index) => {
             return (

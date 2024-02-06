@@ -1,73 +1,73 @@
 .close {
-    font-size: 15px;
-    cursor: pointer;
-    float: right;
-    background: none;
-    border: none;
-    font-weight: bolder;
+  font-size: 15px;
+  cursor: pointer;
+  float: right;
+  background: none;
+  border: none;
+  font-weight: bolder;
 }
 
 .modal-body {
-    width: 350px;
-    height: 50%;
-    display: flex;
-    margin: auto;
-    justify-content: space-between;
-    align-items: center;
+  width: 350px;
+  height: 50%;
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .modal-icon {
-    border-radius: 50%;
-    background-color: rgb(146, 146, 146);
-    padding: 15px;
-    width: 150px;
+  border-radius: 50%;
+  background-color: rgb(146, 146, 146);
+  padding: 15px;
+  width: 150px;
 }
 
 .item-info {
-    color: rgb(50, 50, 50);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  color: rgb(50, 50, 50);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .acessar-button {
-    border-radius: 10px;
-    padding: 5px 15px;
-    text-decoration: none;
-    color: inherit;
-    background-color: rgb(176, 176, 176);
+  border-radius: 10px;
+  padding: 5px 15px;
+  text-decoration: none;
+  color: inherit;
+  background-color: rgb(176, 176, 176);
 }
 
 .modal-footer-head {
-    color: rgb(50, 50, 50);
-    text-align: center;
+  color: rgb(50, 50, 50);
+  text-align: center;
 }
 
 .modal-history {
-    margin: 0 auto;
-    width: 80%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10%
+  margin: 0 auto;
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10%;
 }
 
 .modal-history-item {
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .modal-history-icon {
-    border-radius: 50%;
-    width: 90px;
-    padding: 5px;
+  border-radius: 50%;
+  width: 90px;
+  padding: 5px;
 }
 
 .modal-history-name {
-    font-weight: bold;
-    text-align: center;
-    color: rgb(50, 50, 50)
+  font-weight: bold;
+  text-align: center;
+  color: rgb(50, 50, 50);
 }

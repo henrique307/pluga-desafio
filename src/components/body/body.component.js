@@ -6,8 +6,10 @@ import { ModalComponent } from "./modal/modal.component";
 import Cookies from "js-cookie";
 import "./body.css";
 import { ErrorComponent } from "./Error/error.component";
+import { useAppContext } from "../../context/search.context";
 
-export const BodyComponent = ({ search }) => {
+export const BodyComponent = () => {
+  const { search } = useAppContext();
   const [data, setData] = useState(null);
   const [open, setOpen] = useState(false);
   const [modalContent, setModalContent] = useState(null);
